@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-photo/colorful-abstract-background-multicolored-triangles_662214-546569.jpg');
+            background-size: cover;
+            height: 100%;
+            padding: 130px;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            font-family: "segoe ui", sans-serif;
+            box-sizing: border-box;
+            overflow-x: auto;
+        }
+        .container {
+            background: linear-gradient(135deg , rgb(246, 152, 166), rgb(171, 220, 236), rgb(184, 220, 184), rgb(247, 247, 167));
+            min-width: 800px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        button {
+            background-color: rgb(164, 237, 55);
+            padding: 12px;
+            border: 0;
+            font-weight: bold;
+            border-radius: 25px;
+            margin-top: 10px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        #calci {
+            flex: 1;
+            padding: 30px;
+        }
+        .input-set {
+            display: flex;
+            margin: 6px 0 15px;
+            border-radius: 6px;
+            align-items: center;
+            border: 2px solid;
+        }
+        .input-set input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .input-set span {
+            font-weight: bold;
+            background-color: rgb(146, 207, 54);
+            padding: 10px;
+            border-left: 2px solid;
+        }
+        
+        button:hover {
+            background-color: rgb(40, 46, 34);
+            color: rgb(164, 237, 55);
+        }
+        #res {
+            flex: 1;
+            display: flex;
+            
+            color: rgb(25, 22, 22);
+            text-align: center;
+            padding: 30px;
+            flex-direction: column;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 1.8rem;
+        }
+    </style>
+    <script src="project.js"></script>
+    <title>Mortgage Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <div id="calci">
+            <h2>Mortgage Calculator</h2>
+            <label>Mortgage Amount:</label>
+            <div class="input-set">
+                <span>$</span>
+                <input type="number" placeholder="Enter Amount" id="amount">
+                
+            </div>
+
+            <label>Mortgage Term:</label>
+            <div class="input-set">
+                <input type="number" placeholder="Enter no of years" id="years">
+                <span>years</span>
+            </div>
+
+            <label>Interest Rate:</label>
+            <div class="input-set">
+                <input type="number" placeholder="Enter Interest rate" id="interest">
+                <span>%</span>
+            </div>
+
+            <label>Mortgage Type:</label>
+            <div>
+                <input type="radio" name="Mortgagetype" value="Repayment"> Repayment<br>
+                <input type="radio" name="Mortgagetype" value="Interest Only"> Interest Only
+            </div>
+
+            <div>
+                <button type="submit" onclick="calculate()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calculator" viewBox="0 0 16 16">
+  <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+  <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+</svg>Calculate Repayments</button>
+                <button type="reset" onclick="reset()">Reset</button>
+            </div>
+        </div>
+
+        <div id="res">
+            <p><b>Results shown here</b></p>
+            <p>Complete filling the form and click "Calculate Repayments" to see what your monthly repayments would be.</p>
+        </div>
+    </div>
+</body>
+</html>
